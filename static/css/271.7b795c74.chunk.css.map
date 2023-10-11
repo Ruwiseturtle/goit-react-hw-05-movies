@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/271.7b795c74.chunk.css","mappings":"AAEA,sBACE,eACF,CAEA,uBACE,WACF,CAEA,0BACE,aACF","sources":["components/CastList.module.css"],"sourcesContent":["\n\n.list{\n  list-style: none;\n}\n\n.image{\n  width: 100px;\n}\n\n.textName{\n  color: rgb(30, 143, 47);\n}"],"names":[],"sourceRoot":""}
