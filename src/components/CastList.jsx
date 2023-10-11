@@ -1,27 +1,26 @@
 import { useEffect, useState, Suspense } from 'react';
-import { useParams, useLocation, Outlet } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 import { getCastById } from '../Services/MoviesApi';
 import css from './CastList.module.css';
 
 const CastList = () => {
     const { movieId } = useParams();
   const [casts, setCasts] = useState(null);
-  const location = useLocation();
-    
+      
       useEffect(() => {
         try {
           getCastById(movieId)
             .then(result => {
               return result;
             })
-              .then(data => setCasts(data.data.cast))
+            .then(data => setCasts(data.data.cast))
             .catch(error => {
               console.log('помилка!!!!!!!!!!!');
             });
         } catch (error) {
           console.log('catch');
         }
-      }, []);
+      }, [movieId]);
     
   return (
     <div>
