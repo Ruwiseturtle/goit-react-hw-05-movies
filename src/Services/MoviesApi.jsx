@@ -5,7 +5,7 @@ const API_KEY = '3af5d52e1c45bc82f847627d42b14ae7';
 
 //список найпопулярніших фільмів
 export async function getTrendingMovies() {
-    const url = BASE_URL + 'trending/movie/day' + '?api_key=' + API_KEY;
+    const url = BASE_URL + 'trending/movie/day?api_key=' + API_KEY;
     const data = await axios.get(url);
     return data;
 };
@@ -34,7 +34,7 @@ export async function getReviewsById(id) {
 
 //пошук фільму за ключовим словом
 export async function getMoviesBySearch(searchWord) {
-  const url = BASE_URL + 'search/movie' + '?api_key=' + API_KEY +
+  const url = BASE_URL + 'search/movie?api_key=' + API_KEY +
              '&query=' + searchWord + '&include_adult=false';
   const data = await axios.get(url);
   return data;
