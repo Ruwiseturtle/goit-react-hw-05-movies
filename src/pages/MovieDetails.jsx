@@ -1,8 +1,13 @@
-import {useParams, Link, Outlet, useLocation} from 'react-router-dom';
+import { useParams, Link, useLocation, Outlet } from 'react-router-dom';
 import { useEffect, useState, Suspense } from 'react';
 import { BackLink } from 'components/BackLink';
 import { getMoviesById } from '../Services/MoviesApi';
-import { MovieInformation, Image, Info, Container} from './MovieDetails.styled';
+import {
+  MovieInformation,
+  Image,
+  Info,
+  Container,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -10,6 +15,7 @@ const MovieDetails = () => {
   const location = useLocation();
   const [date, setDate] = useState('');
   const [error, setError] = useState(null);
+   const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     if (error) {
@@ -26,20 +32,21 @@ const MovieDetails = () => {
           setDate(data.data.release_date.split('-', 1));
         })
         .catch(error => {
-          setError(error);
+          console.log('error fetch');
+          // setError(error);
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log('catch');
+    }
   }, [movieId, error]);
-  
+
   if (error) {
     return <div>Something went wrong. Check your network connection...</div>;
-  }
-  else {
+  } else {
     return (
-    <main>
-      <Suspense fallback={<div>Loading page...</div>}>
+      <main>
         <div>
-          <BackLink to={location.state}>{'<- Go Back'}</BackLink>
+          <BackLink to={backLinkHref}>{'<- Go Back'}</BackLink>
           {movie && (
             <MovieInformation>
               <div>
@@ -62,30 +69,29 @@ const MovieDetails = () => {
             </MovieInformation>
           )}
         </div>
-      </Suspense>
 
-      {movie && (
-        <Container>
-          <p>Additional information</p>
-          <ul>
-            <li>
-              <Link to="cast" state={location.state}>
-                Cast
-              </Link>
-            </li>
-            <li>
-              <Link to="reviews" state={location.state}>
-                Reviews
-              </Link>
-            </li>
-          </ul>
-        </Container>
-      )}
-      <Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </Suspense>
-    </main>)
-    
+        {movie && (
+          <Container>
+            <p>Additional information</p>
+            <ul>
+              <li>
+                <Link to="cast" state={location.state}>
+                  Cast
+                </Link>
+              </li>
+              <li>
+                <Link to="reviews" state={location.state}>
+                  Reviews
+                </Link>
+              </li>
+            </ul>
+          </Container>
+        )}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </main>
+    );
   }
 };
 

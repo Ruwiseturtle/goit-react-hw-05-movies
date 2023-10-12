@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getTrendingMovies } from '../Services/MoviesApi';
 import  MoviesList  from './MoviesList';
 
@@ -7,6 +7,11 @@ export const MoviesTrendingList = () => {
   const [error, setError] = useState(null);
   
   useEffect(() => {
+    console.log('movies');
+    console.log(movies);
+  }, [movies]);
+
+  useEffect(() => {   
     if (error) {
       return;
     }
@@ -32,6 +37,9 @@ export const MoviesTrendingList = () => {
     return <div>Something went wrong. Check your network connection...</div>;
   }
   else {
-    return <MoviesList array={movies} />
-  };
+    return (
+      <div>
+        <MoviesList array={movies} />        
+      </div>
+    );  };
 };

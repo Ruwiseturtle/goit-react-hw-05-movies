@@ -1,6 +1,6 @@
 
 import { useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { getMoviesBySearch } from '../Services/MoviesApi';
 import MoviesList from './MoviesList';
 
@@ -33,7 +33,13 @@ const MoviesListBySearch = () => {
     //ф-ція витягує з бекенду фільми,в назві яких є слово з input
    
 
-  return (<MoviesList array={movies} />)
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <MoviesList array={movies} />
+      </Suspense>
+    </div>
+  );
 };
 
 export default MoviesListBySearch

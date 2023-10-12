@@ -14,5 +14,9 @@ export const SearchInput = () => {
     setSearchParams({ movieName: sText });
   };
 
-  return <Input type="text" value={movieName} onChange={updateSearchText} />;
+  return (
+    <div>
+      <Input type="text" value={movieName} onChange={updateSearchText} />      
+    </div>
+  );
 };
