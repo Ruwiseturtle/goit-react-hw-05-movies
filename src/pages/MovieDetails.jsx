@@ -15,7 +15,7 @@ const MovieDetails = () => {
   const location = useLocation();
   const [date, setDate] = useState('');
   const [error, setError] = useState(null);
-   const backLinkHref = location.state?.from ?? '/movies';
+   const backLinkHref = location.state?.from ?? '/';
 
   useEffect(() => {
     if (error) {

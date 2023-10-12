@@ -11,12 +11,13 @@ export const SearchInput = () => {
     if (sText === '') {
       return setSearchParams({});
     }
+
     setSearchParams({ movieName: sText });
   };
 
   return (
     <div>
-      <Input type="text" value={movieName} onChange={updateSearchText} />      
+      <Input type="text" value={movieName} onChange={updateSearchText} />
     </div>
   );
 };
