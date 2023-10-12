@@ -9,9 +9,10 @@ const MoviesListBySearch = () => {
     const [movies, setMovies] = useState([]);
     const [searchParams] = useSearchParams({});
     const movieName = searchParams.get('movieName') ?? '';
-    const debouncedValue = useDebounce(movieName, 500);
-  
-    useEffect(() => {
+  const debouncedValue = useDebounce(movieName, 1000);
+ 
+  useEffect(() => {
+    if (debouncedValue !== movieName){return}
       //робимо запрос на бекенд тільки тоді, коли спрацьовує debound, щоб при кожному onchange
       //не було запитів, бо на бекенді можуть заблокувати
       try {
@@ -24,7 +25,7 @@ const MoviesListBySearch = () => {
           })
           .catch(error => {});
       } catch (error) {}
-    }, [debouncedValue]);   
+  }, [movieName, debouncedValue]);   
  
     //ф-ція витягує з бекенду фільми,в назві яких є слово з input
    
