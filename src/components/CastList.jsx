@@ -5,7 +5,7 @@ import css from './CastList.module.css';
 
 const CastList = () => {
     const { movieId } = useParams();
-  const [casts, setCasts] = useState(null);
+  const [casts, setCasts] = useState([]);
       
       useEffect(() => {
         try {
@@ -24,21 +24,26 @@ const CastList = () => {
     
   return (
     <div>
-      <ul className={css.list}>
-        {casts?.map(cast => (
-          <li key={cast.cast_id}>
-            {cast.profile_path && (
-              <img
-                className={css.image}
-                src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
-                alt={cast.name}
-              ></img>
-            )}
-            <p className={css.textName}>{cast.name}</p>
-            <p>Character: {cast.character}</p>
-          </li>
-        ))}
-      </ul>
+      {casts && (
+        <ul className={css.list}>
+          {casts?.map(cast => (
+            <li key={cast.cast_id}>
+              {cast.profile_path && (
+                <img
+                  className={css.image}
+                  src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
+                  alt={cast.name}
+                ></img>
+              )}
+              <p className={css.textName}>{cast.name}</p>
+              <p>Character: {cast.character}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+      {casts.length === 0 && (
+        <div>There is no information available for this film...</div>
+      )}
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>
