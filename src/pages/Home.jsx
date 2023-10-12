@@ -1,6 +1,5 @@
 import { MoviesTrendingList }  from "../components/GetTrendingMovies";
 import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
 
 const Home = () => {
    

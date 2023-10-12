@@ -32,11 +32,15 @@ const MovieDetails = () => {
           setDate(data.data.release_date.split('-', 1));
         })
         .catch(error => {
-          console.log('error fetch');
+          setError(error.message);
+          console.log('error message');
+          console.log(error.message);
           // setError(error);
         });
     } catch (error) {
-      console.log('catch');
+      setError(error.message);
+      console.log('error message');
+      console.log(error.message);
     }
   }, [movieId, error]);
 

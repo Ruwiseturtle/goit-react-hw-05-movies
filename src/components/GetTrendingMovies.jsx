@@ -26,9 +26,11 @@ export const MoviesTrendingList = () => {
           setTrendingMovies([...data.data.results]);
         })
         .catch(error => {
+          console.log('fetch trending');
           setError(null);
         });
     } catch (error) {
+      console.log('catch trending');
       setError(null);
     }
   }, [error]);
